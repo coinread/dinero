@@ -33,6 +33,8 @@ type Client struct {
 	// Services used for communicating with the API.
 	Rates      *RatesService
 	Currencies *CurrenciesService
+	TimeSeries *TimeSeriesService
+	History    *HistoricalService
 	Cache      *CacheService
 }
 
@@ -58,6 +60,8 @@ func NewClient(appID, baseCurrency string, expiry time.Duration) *Client {
 	// Init services.
 	c.Rates = NewRatesService(c, baseCurrency)
 	c.Currencies = NewCurrenciesService(c)
+	c.TimeSeries = NewTimeSeriesService(c)
+	c.History = NewHistoricalService(c)
 	c.Cache = NewCacheService(c, store)
 
 	return c

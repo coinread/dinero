@@ -24,7 +24,7 @@ type CurrencyResponse struct {
 	Name string `json:"name"`
 }
 
-// List will fetch all list of all currencies available via the OXR api.
+// Get will fetch all list of all currencies available via the OXR api.
 func (s *CurrenciesService) List() ([]*CurrencyResponse, error) {
 	// Build request.
 	req, err := s.client.NewUnauthedRequest(

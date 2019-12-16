@@ -9,7 +9,7 @@ import (
 )
 
 // TestListCurrencies will test listing currencies from the OXR api.
-func TestListCurrencies(t *testing.T) {
+func TestGetHistory(t *testing.T) {
 	// Register the test.
 	RegisterTestingT(t)
 
@@ -17,18 +17,12 @@ func TestListCurrencies(t *testing.T) {
 	client := NewClient(os.Getenv("OPEN_EXCHANGE_APP_ID"), "AUD", 1*time.Minute)
 
 	// Get the currencies
-	rsp, err := client.Currencies.List()
+	rsp, err := client.History.Get(time.Now().Add(time.Hour * -24), "", []string{}, false)
 	if err != nil {
-		t.Fatalf("Unexpected error running client.Currencies.Get(): %s", err.Error())
+		t.Fatalf("Unexpected error running client.TimeSeries.Get(): %s", err.Error())
 	}
 
 	Expect(err).Should(BeNil())
-	Expect(rsp).Should(ContainElement(&CurrencyResponse{
-		Code: "AUD",
-		Name: "Australian Dollar",
-	}))
-	Expect(rsp).Should(ContainElement(&CurrencyResponse{
-		Code: "NZD",
-		Name: "New Zealand Dollar",
-	}))
+	Expect(rsp).Should(Not(BeNil()))
+	Expect(rsp.Base).ShouldNot(BeEmpty())
 }

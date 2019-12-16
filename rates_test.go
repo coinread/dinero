@@ -20,7 +20,7 @@ func TestListRates(t *testing.T) {
 	// Get latest forex rates.
 	response, err := client.Rates.List()
 	if err != nil {
-		t.Fatalf("Unexpected error running client.Rates.List(): %s", err.Error())
+		t.Fatalf("Unexpected error running client.Rates.Get(): %s", err.Error())
 	}
 
 	if response.Base != "AUD" {

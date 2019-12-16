@@ -20,7 +20,7 @@ func TestCache(t *testing.T) {
 	// Get latest forex rates.
 	response1, err := client.Rates.List()
 	if err != nil {
-		t.Fatalf("Unexpected error running client.Rates.List(): %s", err.Error())
+		t.Fatalf("Unexpected error running client.Rates.Get(): %s", err.Error())
 	}
 
 	// Fetch results again
